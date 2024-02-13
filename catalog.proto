@@ -4,11 +4,14 @@ package picar_catalog;
 import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
 
-option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
-    basePath: "/api/v1"
-}
-
 option go_package = "./pb";
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  basePath: "/api/v1";
+  schemes: HTTP;
+  schemes: HTTPS;
+  host: "http://localhost:8081"
+  host: "https://catalog.picar.cloud"
+};
 
 message FuelType {
   int32 id = 1;
