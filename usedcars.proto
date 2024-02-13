@@ -1,6 +1,6 @@
 syntax = "proto3";
 package picar_catalog;
-
+option go_package="./pb";
 
 //Data
 
