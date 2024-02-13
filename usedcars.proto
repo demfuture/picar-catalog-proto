@@ -1,0 +1,183 @@
+syntax = "proto3";
+package picar_catalog;
+
+
+//Data
+
+message VersionFromPlateData {
+    string providerId = 1;
+    string versionName = 2;
+    string versionId = 3;
+    int64 sellStart = 4;
+    int64 sellEnd = 5;
+    bool cdn = 6;
+    string versionHandler = 7;
+}
+
+message ReferencedData {
+    string value  = 1;
+	string id    = 2;
+	string providerId = 3;
+}
+
+message EngineData {
+    int32 hp = 1;
+    int32 kw = 2;
+    string name = 3;
+    int32 kwIpt = 4;
+    double emissionsMin = 5;
+    double emissionsMax = 6;
+    double wltpConsumptionMin = 7;
+    double wltpConsumptionMax = 8;
+    ReferencedData fuelType = 9;
+    int32 maxSpeed = 10;
+    double maxTorque = 11;
+    int32 maxTorqueRef = 12;
+    double acceleration = 13;
+    int32 displacement = 14;
+    string displacementName = 15;
+    ReferencedData emissionsHomologation = 16;
+    bool allowNewDriver = 17;
+}
+
+message TransmissionData {
+    string drive = 1;
+    int32 gears = 2;
+    string gearboxType = 3;
+    string specificName = 4;
+}
+
+message BodyData {
+    int32 doorNumber = 1;
+    double width = 2;
+    double height = 3;
+    double length = 4;
+    double weight = 5;
+    double maxTrunk = 6;
+    double minTrunk = 7;
+    int32 seats = 8;
+    int32 tankSize = 9;
+}
+
+message VersionsFromPlateResponse {
+    string plateNumber = 1;
+    string vinNumber = 2;
+    int32 sourceReturnCode = 3;
+    int64 matriculationDate = 4;
+    repeated VersionFromPlateData versions = 5;
+    double age = 6;
+    int32 expectedMileage = 7;
+    bool cdn = 8;
+    string provider = 9;
+}
+
+message AvailableCarFeature {
+    int32 Id = 1;
+	string ProviderId = 2;
+	string Description = 3;
+	string Category = 5;
+	int32 NormalizedCode = 4;
+    bool DefaultOption = 6;
+}
+
+message VersionDetailsResponse {
+    bool success = 1;
+    string providerVersionId = 2;
+    string providerMakeId = 3;
+    string providerModelId = 4;
+    string versionHandler = 5;
+    string makeName = 6;
+    string makeShortID = 7;
+    int32 makeID = 8;
+    string versionName = 9;
+    string modelName = 10;
+    int64 sellStart = 11;
+    int64 sellEnd = 12;
+    string versionID = 13;
+    string versionCode = 14;
+    string versionFullName = 15;
+    EngineData engine = 16;
+    TransmissionData transmission = 17;
+    BodyData body = 18;
+    repeated AvailableCarFeature carFeatures = 19;
+    string provider = 20;
+}
+
+message UsedCarMake {
+    string name = 1;
+    string providerId = 2;
+    int32 makeId = 3;
+    string makeShortId = 4;
+}
+
+message UsedCarModel {
+    string name = 1;
+    string providerId = 2;
+    string modelId = 3;
+}
+
+message UsedCarVersion {
+    string name = 1;
+    string providerId = 2;
+    string versionHandler = 3;
+    string modelYear = 4;
+    ReferencedData fuelType = 5;
+    int64 sellStart = 6;
+    int64 sellEnd = 7;
+}
+
+message PlateRequest {
+    string provider = 1;
+    string plateNumber = 2;
+}
+
+message VersionDetailsRequest {
+    string provider = 1;
+    string providerId = 2;
+}
+
+message UsedCatalogRequest {
+    string provider = 1;
+    string identifier = 2;
+    int32 year = 3; 
+}
+
+message UsedMakesResponse {
+    repeated UsedCarMake makes = 1;
+    string provider = 2;
+}
+
+message UsedModelsResponse {
+    repeated UsedCarModel models = 1;
+    string provider = 2;
+}
+
+message UsedVersionsResponse {
+    repeated UsedCarVersion versions = 1;
+    string provider = 2;
+}
+
+message VersionsDifferenceRequest {
+    string provider = 1;
+    repeated string identifiers = 2;
+}
+
+message AvailabilityArray {
+    repeated string perFeatureArray = 1;
+}
+
+message VersionsDifferenceResponse {
+    repeated UsedCarVersion versions = 1;
+    repeated AvailableCarFeature differentFeatures = 2;
+    repeated AvailabilityArray availability = 3;
+    string provider = 4;
+}
+
+service UsedCarInfo {
+    rpc GetVersionsFromPlate(PlateRequest) returns (VersionsFromPlateResponse) {}
+    rpc GetVersionsDetails(VersionDetailsRequest) returns (VersionDetailsResponse) {}
+    rpc GetUsedMakes(UsedCatalogRequest) returns (UsedMakesResponse) {}
+    rpc GetUsedModelsForMake(UsedCatalogRequest) returns ( UsedModelsResponse) {}
+    rpc GetUsedVersionsForModel(UsedCatalogRequest) returns ( UsedVersionsResponse) {}
+    rpc GetUsedVersionsDifferences(VersionsDifferenceRequest) returns ( VersionsDifferenceResponse) {}
+}
