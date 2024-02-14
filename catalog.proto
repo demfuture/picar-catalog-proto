@@ -4,6 +4,7 @@ package picar_catalog;
 import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
+import "catalog_messages.proto";
 
 option go_package = "./pb";
 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
@@ -12,72 +13,7 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
   schemes: HTTPS;
 };
 
-message FuelType {
-  int32 id = 1;
-  string shortId = 2;
-  string name = 3;
-  bool isHybrid = 4;
-  bool isEv = 5;
-  string infocarCode = 6;
-  string eurotaxCode = 7;
-}
 
-message BodyType {
-  int32 id = 1;
-  string typeName = 2;
-}
-
-message FeaturesType {
-  int32 id = 1;
-  string description = 2;
-  int32 normalizedCode = 3;
-  string normalizedDescription = 4;
-  string featureGroup = 5;
-  string category = 6;
-  string infocarCode = 7;
-  int32 eurotaxCode = 8;
-}
-
-message EmissionHomologation {
-  int32 id = 1;
-  string emissionName = 2;
-  string infocarCode = 3;
-  string eurotaxCode = 4;
-}
-
-message GearboxType {
-  string id = 1;
-  string name = 2;
-}
-
-message DriveType {
-  string id = 1;
-  string name = 2;
-}
-
-message FuelTypesResponse {
-  repeated FuelType types = 1;
-}
-
-message BodyTypesResponse {
-  repeated BodyType types = 1;
-}
-
-message FeaturesTypesResponse {
-  repeated FeaturesType types = 1;
-}
-
-message EmissionHomologationsResponse {
-  repeated EmissionHomologation types = 1;
-}
-
-message GearboxTypesResponse {
-  repeated GearboxType types = 1;
-}
-
-message DriveTypesResponse {
-  repeated DriveType types = 1;
-}
 
 service CarCatalog {
   rpc GetFuelTypes(google.protobuf.Empty) returns (FuelTypesResponse) {
