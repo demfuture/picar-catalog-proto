@@ -5,6 +5,7 @@ import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 import "catalog_messages.proto";
+import "dictionaries_messages.proto";
 
 option go_package = "./pb";
 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
@@ -13,25 +14,27 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
   schemes: HTTPS;
 };
 
-
-
 service CarCatalog {
   rpc GetFuelTypes(google.protobuf.Empty) returns (FuelTypesResponse) {
-    option (google.api.http) = {get: "/fuel-types"};
+    option (google.api.http) = {get: "/types/fuel-types"};
   }
   rpc GetBodyTypes(google.protobuf.Empty) returns (BodyTypesResponse) {
-    option (google.api.http) = {get: "/body-types"};
+    option (google.api.http) = {get: "/types/body-types"};
   }
   rpc GetFeaturesTypes(google.protobuf.Empty) returns (FeaturesTypesResponse) {
-    option (google.api.http) = {get: "/features-types"};
+    option (google.api.http) = {get: "/types/features-types"};
   }
   rpc GetEmissionHomologations(google.protobuf.Empty) returns (EmissionHomologationsResponse) {
-    option (google.api.http) = {get: "/emission-homologations"};
+    option (google.api.http) = {get: "/types/emission-homologations"};
   }
   rpc GetGearboxTypes(google.protobuf.Empty) returns (GearboxTypesResponse) {
-    option (google.api.http) = {get: "/gearbox-types"};
+    option (google.api.http) = {get: "/types/gearbox-types"};
   }
   rpc GetDriveTypes(google.protobuf.Empty) returns (DriveTypesResponse) {
-    option (google.api.http) = {get: "/drive-types"};
+    option (google.api.http) = {get: "/types/drive-types"};
+  }
+  //Starting catalog
+  rpc GetMakes(google.protobuf.Empty) returns (GetMakesResponse) {
+    option (google.api.http) = {get: "/makes"};
   }
 }
