@@ -1,0 +1,2 @@
+format:
+	buf format -w

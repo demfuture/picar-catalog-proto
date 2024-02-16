@@ -1,11 +1,11 @@
 syntax = "proto3";
 package picar_catalog;
 
+import "catalog_messages.proto";
+import "dictionaries_messages.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
-import "catalog_messages.proto";
-import "dictionaries_messages.proto";
 
 option go_package = "./pb";
 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
@@ -16,25 +16,39 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
 
 service CarCatalog {
   rpc GetFuelTypes(google.protobuf.Empty) returns (FuelTypesResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {tags: "dictionaries"};
     option (google.api.http) = {get: "/types/fuel-types"};
   }
   rpc GetBodyTypes(google.protobuf.Empty) returns (BodyTypesResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {tags: "dictionaries"};
     option (google.api.http) = {get: "/types/body-types"};
   }
   rpc GetFeaturesTypes(google.protobuf.Empty) returns (FeaturesTypesResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {tags: "dictionaries"};
     option (google.api.http) = {get: "/types/features-types"};
   }
   rpc GetEmissionHomologations(google.protobuf.Empty) returns (EmissionHomologationsResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {tags: "dictionaries"};
     option (google.api.http) = {get: "/types/emission-homologations"};
   }
   rpc GetGearboxTypes(google.protobuf.Empty) returns (GearboxTypesResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {tags: "dictionaries"};
     option (google.api.http) = {get: "/types/gearbox-types"};
   }
   rpc GetDriveTypes(google.protobuf.Empty) returns (DriveTypesResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {tags: "dictionaries"};
     option (google.api.http) = {get: "/types/drive-types"};
   }
   //Starting catalog
   rpc GetMakes(google.protobuf.Empty) returns (GetMakesResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {tags: "makes"};
     option (google.api.http) = {get: "/makes"};
+  }
+  rpc GetModelsByMake(ModelsByMakeRequest) returns (GetModelsResponse) {
+    option (google.api.http) = {get: "/makes/{make_id}"};
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "makes"
+      tags: "models"
+    };
   }
 }
