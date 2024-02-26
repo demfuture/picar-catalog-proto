@@ -45,10 +45,11 @@ service CarCatalog {
     option (google.api.http) = {get: "/makes"};
   }
   rpc GetModelsByMake(ModelsByMakeRequest) returns (GetModelsResponse) {
-    option (google.api.http) = {get: "/makes/{make_id}"};
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      tags: "makes"
-      tags: "models"
-    };
+    option (google.api.http) = {get: "/makes/{make_id}/models"};
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {tags: "models"};
+  }
+  rpc SellableVersionsByModel(ModelsByMakeRequest) returns (GetModelsResponse) {
+    option (google.api.http) = {get: "/makes/{make_id}/models"};
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {tags: "models"};
   }
 }

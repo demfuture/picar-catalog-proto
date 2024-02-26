@@ -55,5 +55,8 @@ message GetMakesResponse {
 message GetModelsResponse {
   Make make = 1;
   repeated Model models = 2;
-  
+}
+
+message GetVersionsByModelRequest {
+  string model_id = 1;
 }
