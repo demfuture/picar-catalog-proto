@@ -57,6 +57,42 @@ message GetModelsResponse {
   repeated Model models = 2;
 }
 
-message GetVersionsByModelRequest {
+message ShortHomologationClass {
+  int32 id = 1;
+  string name = 2;
+}
+
+message VersionsByModelRequest {
   string model_id = 1;
+}
+
+message ListedVersion {
+  string id = 1;
+  string name = 2;
+  string version_code = 3;
+  string make_public_id = 4;
+  int32 hp = 5;
+  int32 kw = 6;
+  int32 seats = 7;
+  int32 doors = 8;
+  double fuel_consumption_wltp_max = 9;
+  double emissions_wltp = 10;
+  string drive = 11;
+  string gearbox_type = 12;
+  int32 gears = 13;
+  ShortHomologationClass homologation_class = 14;
+  int64 starting_price = 15;
+  string model_id = 16;
+  string model_name = 17;
+  int32 make_id = 18;
+  ShortFuelType fuel_type = 19;
+  string image_key = 20;
+  string image_url = 21;
+  string infocar_code = 22;
+  string eurotax_code = 23;
+}
+
+message GetVersionsByModelResponse {
+  Model model = 1;
+  repeated ListedVersion versions = 2;
 }
