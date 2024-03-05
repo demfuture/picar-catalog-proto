@@ -43,6 +43,11 @@ message Model {
   int64 starting_price = 13;
 }
 
+message ContentImage {
+  string key = 1;
+  string url = 2;
+}
+
 message ModelsByMakeRequest {
   int32 make_id = 1;
   google.protobuf.BoolValue sellable_only = 2;
@@ -64,6 +69,17 @@ message ShortHomologationClass {
 
 message VersionsByModelRequest {
   string model_id = 1;
+}
+
+message Modelyear {
+  string id = 1;
+  string name = 2;
+  google.protobuf.Timestamp sales_start = 3;
+  google.protobuf.Timestamp sales_end = 4;
+  bool is_restiling = 5;
+  string series_id = 6;
+  int32 series_number = 7;
+  repeated ContentImage images = 8;
 }
 
 message ListedVersion {
@@ -94,5 +110,6 @@ message ListedVersion {
 
 message GetVersionsByModelResponse {
   Model model = 1;
-  repeated ListedVersion versions = 2;
+  Modelyear modelyear = 2;
+  repeated ListedVersion versions = 3;
 }
