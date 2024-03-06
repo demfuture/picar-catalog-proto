@@ -104,8 +104,9 @@ message ListedVersion {
   ShortFuelType fuel_type = 19;
   string image_key = 20;
   string image_url = 21;
-  string infocar_code = 22;
-  string eurotax_code = 23;
+  string modelyear = 22;
+  string infocar_code = 23;
+  string eurotax_code = 24;
 }
 
 message GetVersionsByModelResponse {
