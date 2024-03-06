@@ -46,6 +46,7 @@ message Model {
 message ContentImage {
   string key = 1;
   string url = 2;
+  string image_descriptor = 3;
 }
 
 message ModelsByMakeRequest {
@@ -76,7 +77,7 @@ message Modelyear {
   string name = 2;
   google.protobuf.Timestamp sales_start = 3;
   google.protobuf.Timestamp sales_end = 4;
-  bool is_restiling = 5;
+  bool is_restyling = 5;
   string series_id = 6;
   int32 series_number = 7;
   repeated ContentImage images = 8;
@@ -107,10 +108,14 @@ message ListedVersion {
   string modelyear = 22;
   string infocar_code = 23;
   string eurotax_code = 24;
+  bool has_ev_data = 25;
+  bool is_ev = 26;
+  double ev_consumption_wltp_max = 27;
+  double ev_battery_size = 28;
 }
 
 message GetVersionsByModelResponse {
   Model model = 1;
-  Modelyear modelyear = 2;
+  Modelyear current_modelyear = 2;
   repeated ListedVersion versions = 3;
 }
