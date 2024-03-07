@@ -56,4 +56,8 @@ service CarCatalog {
     option (google.api.http) = {get: "/versions/{version_id}"};
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {tags: "versions"};
   }
+  rpc GetVersionFeatures(GetVersionFeaturesRequest) returns (GetVersionFeaturesResponse) {
+    option (google.api.http) = {get: "/versions/{version_id}/features"};
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {tags: "versions"};
+  }
 }

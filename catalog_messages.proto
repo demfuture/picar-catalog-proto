@@ -220,3 +220,38 @@ message GetVersionDetailsResponse {
   DetailedCarVersion version = 1;
   VersionModelData general_info = 2;
 }
+
+message CarFeature {
+  string id = 1;
+  int32 type_id = 2;
+  string make_public_id = 3;
+  string name = 4;
+  string description = 5;
+  bool standard = 6;
+  string availability = 7;
+  string type_description = 8;
+  string normalized_description = 9;
+  string category = 10;
+  int64 list_price = 11;
+  int32 normalized_code = 12;
+  repeated WithFeatureDependency features_dependencies = 13;
+  repeated WithPackDependency packs_dependencies = 14;
+}
+
+message WithFeatureDependency {
+  string feature_id = 1;
+  string dependency_type = 2;
+}
+
+message WithPackDependency {
+  string pack_id = 1;
+  string dependency_type = 2;
+}
+
+message GetVersionFeaturesRequest {
+  string version_id = 1;
+}
+
+message GetVersionFeaturesResponse {
+  repeated CarFeature features = 1;
+}
