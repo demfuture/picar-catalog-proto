@@ -47,6 +47,7 @@ message ContentImage {
   string key = 1;
   string url = 2;
   string image_descriptor = 3;
+  bool has_priority = 4;
 }
 
 message ModelsByMakeRequest {
@@ -118,4 +119,104 @@ message GetVersionsByModelResponse {
   Model model = 1;
   Modelyear current_modelyear = 2;
   repeated ListedVersion versions = 3;
+}
+
+message CarBodyData {
+  int32 height = 1;
+  int32 width = 2;
+  int32 length = 3;
+  int32 weight = 4;
+  int32 transport_capacity = 5;
+  int32 max_trunk = 6;
+  int32 min_trunk = 7;
+  int32 seats = 8;
+  int32 doors = 9;
+}
+
+message FuelSystemData {
+  double fuel_consumption_wltp_max = 1;
+  double fuel_consumption_wltp_min = 2;
+  double emissions_wltp = 3;
+  int32 ev_kw = 4;
+  double ev_consumption_wltp_max = 5;
+  double ev_consumption_wltp_min = 6;
+  double tank_capacity = 7;
+  double ev_battery_capacity = 8;
+  bool is_ev = 9;
+  bool is_electrified = 10;
+}
+
+message CarPowertrainData {
+  string engine_name = 1;
+  int32 hp = 2;
+  int32 kw = 3;
+  int32 ev_kw = 4;
+  int32 kw_legal = 5;
+  int32 max_speed = 6;
+  int32 max_torque = 7;
+  int32 max_torque_rpm = 8;
+  double acceleration = 9;
+  int32 cylinders = 10;
+  int32 displacement = 11;
+  string displacement_name = 12;
+  string drive = 13;
+  int32 gears = 14;
+  string gearbox_type = 15;
+  string gearbox_name = 16;
+  int32 warranty_years = 17;
+  int32 warranty_km = 18;
+  int32 combustion_kw = 19;
+  string powertrain_notes = 20;
+  double fuel_consumption_wltp_max = 21;
+  double fuel_consumption_wltp_min = 22;
+  double emissions_wltp = 23;
+  double ev_consumption_wltp_max = 25;
+  double ev_consumption_wltp_min = 26;
+  double tank_capacity = 27;
+  double ev_battery_capacity = 28;
+  bool is_ev = 29;
+  bool is_electrified = 30;
+}
+
+message DetailedCarVersion {
+  string id = 1;
+  string name = 2;
+  string version_code = 3;
+  string make_public_id = 4;
+  string infocar_id = 5;
+  string eurotax_id = 6;
+  bool is_truck = 7;
+  int32 trim_level = 8;
+  string trimMakeId = 9;
+  string trimName = 10;
+  string trimDescription = 11;
+  CarPowertrainData powertrain = 12;
+  CarBodyData body = 13;
+  int64 list_price = 14;
+  google.protobuf.Timestamp list_price_date = 15;
+  bool allow_new_driver = 16;
+  ShortFuelType fuel_type = 17;
+  ShortHomologationClass emission_omologation = 18;
+  repeated ContentImage images = 19;
+}
+
+message VersionModelData {
+  int32 make_id = 1;
+  string make = 2;
+  string model_id = 3;
+  string model = 4;
+  int32 series = 5;
+  string modelyear = 6;
+  google.protobuf.Timestamp sales_start = 7;
+  google.protobuf.Timestamp sales_end = 8;
+  repeated ContentImage images = 9;
+}
+
+message GetVersionDetailsRequest {
+  string version_id = 1;
+}
+
+message GetVersionDetailsResponse {
+  DetailedCarVersion version = 1;
+  VersionModelData general_info = 2;
 }
