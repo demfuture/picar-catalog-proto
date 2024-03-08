@@ -252,6 +252,44 @@ message GetVersionFeaturesRequest {
   string version_id = 1;
 }
 
+message ContainedCarFeature {
+  string id = 1;
+  int32 type_id = 2;
+  string name = 3;
+  string description = 4;
+  string type_description = 5;
+  string normalized_description = 6;
+  int32 normalized_code = 7;
+  string category = 8;
+}
+
+message CarFeaturePack {
+  string id = 1;
+  string make_public_id = 2;
+  string name = 3;
+  string description = 4;
+  bool standard = 5;
+  string availability = 6;
+  int64 list_price = 7;
+  repeated ContainedCarFeature content = 8;
+  repeated WithFeatureDependency features_dependencies = 9;
+  repeated WithPackDependency packs_dependencies = 10;
+}
+
+message PaintScheme {
+  string id = 1;
+  string name = 2;
+  string make_public_id = 3;
+  bool is_bicolor = 4;
+  string display_color = 5;
+  string secondary_color = 6;
+  string availability = 7;
+  int64 list_price = 8;
+  bool standard = 9;
+}
+
 message GetVersionFeaturesResponse {
   repeated CarFeature features = 1;
+  repeated CarFeaturePack packs = 2;
+  repeated PaintScheme paint_schemes = 3;
 }
