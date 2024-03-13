@@ -178,6 +178,13 @@ message CarPowertrainData {
   bool is_electrified = 30;
 }
 
+message PriceDetails {
+  int64 fitting_price = 1;
+  int64 fitting_price_vat_free = 2;
+  int64 ecotax = 3;
+  google.protobuf.Timestamp list_price_date = 4;
+}
+
 message DetailedCarVersion {
   string id = 1;
   string name = 2;
@@ -193,7 +200,7 @@ message DetailedCarVersion {
   CarPowertrainData powertrain = 12;
   CarBodyData body = 13;
   int64 list_price = 14;
-  google.protobuf.Timestamp list_price_date = 15;
+  PriceDetails price_details = 15;
   bool allow_new_driver = 16;
   ShortFuelType fuel_type = 17;
   ShortHomologationClass emission_omologation = 18;
@@ -292,4 +299,32 @@ message GetVersionFeaturesResponse {
   repeated CarFeature features = 1;
   repeated CarFeaturePack packs = 2;
   repeated PaintScheme paint_schemes = 3;
+}
+
+message PromotionCampaign {
+  string id = 1;
+  string name = 2;
+  string type = 3;
+  string required_component = 4;
+  bool apply_vat = 5;
+  string description = 6;
+  google.protobuf.Timestamp matriculation_max_date = 7;
+  bool public = 8;
+  string public_description = 9;
+  int64 dealer_fixed = 10;
+  float dealer_percentage = 11;
+  int64 external_fixed = 12;
+  float external_percentage = 13;
+  google.protobuf.Timestamp start_date = 14;
+  google.protobuf.Timestamp end_date = 15;
+  repeated string incompatibilities = 16;
+}
+
+message GetCampaignsRequest {
+  string version_id = 1;
+  google.protobuf.BoolValue public_only = 2;
+}
+
+message GetCampaignsResponse {
+  repeated PromotionCampaign campaigns = 1;
 }

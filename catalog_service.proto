@@ -60,4 +60,9 @@ service CarCatalog {
     option (google.api.http) = {get: "/versions/{version_id}/features"};
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {tags: "versions"};
   }
+
+  rpc GetVersionCampaigns(GetCampaignsRequest) returns (GetCampaignsResponse) {
+    option (google.api.http) = {get: "/versions/{version_id}/campaigns"};
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {tags: "versions"};
+  }
 }
