@@ -116,9 +116,10 @@ message ListedVersion {
 }
 
 message GetVersionsByModelResponse {
-  Model model = 1;
-  Modelyear current_modelyear = 2;
-  repeated ListedVersion versions = 3;
+  Make make = 1;
+  Model model = 2;
+  Modelyear current_modelyear = 3;
+  repeated ListedVersion versions = 4;
 }
 
 message CarBodyData {
