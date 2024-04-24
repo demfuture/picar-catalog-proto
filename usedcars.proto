@@ -5,6 +5,11 @@ option go_package = "./pb";
 
 //Data
 
+enum CarCondition {
+  USED = 0;
+  NEW = 1;
+}
+
 message VersionFromPlateData {
   string providerId = 1;
   string versionName = 2;
@@ -104,20 +109,20 @@ message VersionDetailsResponse {
   string provider = 20;
 }
 
-message UsedCarMake {
+message ExternalCarMake {
   string name = 1;
   string providerId = 2;
   int32 makeId = 3;
   string makeShortId = 4;
 }
 
-message UsedCarModel {
+message ExternalCarModel {
   string name = 1;
   string providerId = 2;
   string modelId = 3;
 }
 
-message UsedCarVersion {
+message ExternalCarVersion {
   string name = 1;
   string providerId = 2;
   string versionHandler = 3;
@@ -134,33 +139,36 @@ message PlateRequest {
 
 message VersionDetailsRequest {
   string provider = 1;
-  string providerId = 2;
+  CarCondition condition = 2;
+  string providerId = 3;
 }
 
-message UsedCatalogRequest {
+message ExternalCatalogRequest {
   string provider = 1;
-  string identifier = 2;
-  int32 year = 3;
+  CarCondition condition = 2;
+  string identifier = 3;
+  int32 year = 4;
 }
 
-message UsedMakesResponse {
-  repeated UsedCarMake makes = 1;
+message ExternalMakesResponse {
+  repeated ExternalCarMake makes = 1;
   string provider = 2;
 }
 
-message UsedModelsResponse {
-  repeated UsedCarModel models = 1;
+message ExternalModelsResponse {
+  repeated ExternalCarModel models = 1;
   string provider = 2;
 }
 
-message UsedVersionsResponse {
-  repeated UsedCarVersion versions = 1;
+message ExternalVersionsResponse {
+  repeated ExternalCarVersion versions = 1;
   string provider = 2;
 }
 
 message VersionsDifferenceRequest {
   string provider = 1;
-  repeated string identifiers = 2;
+  CarCondition condition = 2;
+  repeated string identifiers = 3;
 }
 
 message AvailabilityArray {
@@ -168,17 +176,17 @@ message AvailabilityArray {
 }
 
 message VersionsDifferenceResponse {
-  repeated UsedCarVersion versions = 1;
+  repeated ExternalCarVersion versions = 1;
   repeated AvailableCarFeature differentFeatures = 2;
   repeated AvailabilityArray availability = 3;
   string provider = 4;
 }
 
-service UsedCarInfo {
+service ExternalCarInfo {
   rpc GetVersionsFromPlate(PlateRequest) returns (VersionsFromPlateResponse) {}
   rpc GetVersionsDetails(VersionDetailsRequest) returns (VersionDetailsResponse) {}
-  rpc GetUsedMakes(UsedCatalogRequest) returns (UsedMakesResponse) {}
-  rpc GetUsedModelsForMake(UsedCatalogRequest) returns (UsedModelsResponse) {}
-  rpc GetUsedVersionsForModel(UsedCatalogRequest) returns (UsedVersionsResponse) {}
-  rpc GetUsedVersionsDifferences(VersionsDifferenceRequest) returns (VersionsDifferenceResponse) {}
+  rpc GetExternalMakes(ExternalCatalogRequest) returns (ExternalMakesResponse) {}
+  rpc GetExternalModelsForMake(ExternalCatalogRequest) returns (ExternalModelsResponse) {}
+  rpc GetExternalVersionsForModel(ExternalCatalogRequest) returns (ExternalVersionsResponse) {}
+  rpc GetExternalVersionsDifferences(VersionsDifferenceRequest) returns (VersionsDifferenceResponse) {}
 }
