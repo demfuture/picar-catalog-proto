@@ -65,4 +65,14 @@ service CarCatalog {
     option (google.api.http) = {get: "/versions/{version_id}/campaigns"};
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {tags: "versions"};
   }
+
+  rpc GetActivePromos(GetPromoRequest) returns (GetPromoResponse) {
+    option (google.api.http) = {get: "/makes/{make_id}/promo"};
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {tags: "makes"};
+  }
+
+  rpc GetPromoDetail(GetPromoDetailRequest) returns (Promo) {
+    option (google.api.http) = {get: "/promo/{promo_id}"};
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {tags: "promo"};
+  }
 }

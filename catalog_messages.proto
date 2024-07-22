@@ -329,3 +329,36 @@ message GetCampaignsRequest {
 message GetCampaignsResponse {
   repeated PromotionCampaign campaigns = 1;
 }
+
+message Promo {
+  string id = 1;
+  string title = 2;
+  int64 price = 3;
+  string price_type = 4;
+  string price_subtitle = 5;
+  string cover_image_key = 6;
+  string claim = 7;
+  string version_id = 8;
+  string model_id = 9;
+  int32 make_id = 10;
+  string body = 11;
+  string disclaimer = 12;
+  google.protobuf.Timestamp valid_from = 13;
+  google.protobuf.Timestamp valid_to = 14;
+  string related_campaign = 15;
+  google.protobuf.Timestamp last_update = 16;
+  string model_name = 17;
+  string version_name = 18;
+}
+
+message GetPromoResponse {
+  repeated Promo promo = 1;
+}
+
+message GetPromoRequest {
+  int32 make_id = 1;
+}
+
+message GetPromoDetailRequest {
+  string promo_id = 1;
+}
