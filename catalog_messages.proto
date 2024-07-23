@@ -349,6 +349,8 @@ message Promo {
   google.protobuf.Timestamp last_update = 16;
   string model_name = 17;
   string version_name = 18;
+  string make_name = 19;
+  string cover_image_url = 20;
 }
 
 message GetPromoResponse {
