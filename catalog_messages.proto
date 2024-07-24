@@ -3,6 +3,7 @@ package picar_catalog;
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
+import "google/protobuf/struct.proto";
 
 option go_package = "./pb";
 
@@ -330,6 +331,12 @@ message GetCampaignsResponse {
   repeated PromotionCampaign campaigns = 1;
 }
 
+message ContentBodyBlock {
+  string id = 1;
+  string type = 2;
+  google.protobuf.Struct properties = 3;
+}
+
 message Promo {
   string id = 1;
   string title = 2;
@@ -341,7 +348,7 @@ message Promo {
   string version_id = 8;
   string model_id = 9;
   int32 make_id = 10;
-  string body = 11;
+  repeated ContentBodyBlock body = 11;
   string disclaimer = 12;
   google.protobuf.Timestamp valid_from = 13;
   google.protobuf.Timestamp valid_to = 14;
