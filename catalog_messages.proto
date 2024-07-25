@@ -72,6 +72,7 @@ message ShortHomologationClass {
 
 message VersionsByModelRequest {
   string model_id = 1;
+  google.protobuf.Timestamp check_date = 2;
 }
 
 message Modelyear {
