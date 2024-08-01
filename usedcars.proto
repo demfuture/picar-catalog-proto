@@ -44,6 +44,7 @@ message EngineData {
   string displacementName = 15;
   ReferencedData emissionsHomologation = 16;
   bool allowNewDriver = 17;
+  int32 cylinders = 18;
 }
 
 message TransmissionData {
@@ -107,6 +108,7 @@ message VersionDetailsResponse {
   BodyData body = 18;
   repeated AvailableCarFeature carFeatures = 19;
   string provider = 20;
+  int64 publicListPrice = 21;
 }
 
 message ExternalCarMake {
