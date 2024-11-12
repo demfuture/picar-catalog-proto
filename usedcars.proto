@@ -184,6 +184,31 @@ message VersionsDifferenceResponse {
   string provider = 4;
 }
 
+message ExternalMakeTranslateRequest {
+  string provider = 1;
+  string makeName = 2;
+  optional int32 makeId = 3;
+  optional int32 year = 4;
+}
+
+message MakeTranslationResponse {
+  ExternalCarMake make = 1;
+  double confidency = 2;
+}
+
+message ExternalModelTranslateRequest {
+  string provider = 1;
+  string modelName = 2;
+  string makeProviderId = 3;
+  optional int32 year = 4;
+}
+
+
+message ModelTranslationResponse {
+  ExternalCarModel model = 1;
+  double confidency = 2;
+}
+
 service ExternalCarInfo {
   rpc GetVersionsFromPlate(PlateRequest) returns (VersionsFromPlateResponse) {}
   rpc GetVersionsDetails(VersionDetailsRequest) returns (VersionDetailsResponse) {}
@@ -191,4 +216,6 @@ service ExternalCarInfo {
   rpc GetExternalModelsForMake(ExternalCatalogRequest) returns (ExternalModelsResponse) {}
   rpc GetExternalVersionsForModel(ExternalCatalogRequest) returns (ExternalVersionsResponse) {}
   rpc GetExternalVersionsDifferences(VersionsDifferenceRequest) returns (VersionsDifferenceResponse) {}
+  rpc TranslateMakeName(ExternalMakeTranslateRequest) returns (MakeTranslationResponse) {}
+  rpc TranslateModelName(ExternalModelTranslateRequest) returns (ModelTranslationResponse) {}
 }
