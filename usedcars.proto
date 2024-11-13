@@ -209,6 +209,20 @@ message ModelTranslationResponse {
   double confidency = 2;
 }
 
+message ExternalVersionTranslateRequest {
+  string provider = 1;
+  string versionName = 2;
+  string modelProviderId = 3;
+  optional int32 year = 4;
+  optional int32 fuelType = 5;
+}
+
+
+message VersionTranslationResponse {
+  ExternalCarVersion version = 1;
+  double confidency = 2;
+}
+
 service ExternalCarInfo {
   rpc GetVersionsFromPlate(PlateRequest) returns (VersionsFromPlateResponse) {}
   rpc GetVersionsDetails(VersionDetailsRequest) returns (VersionDetailsResponse) {}
@@ -218,4 +232,5 @@ service ExternalCarInfo {
   rpc GetExternalVersionsDifferences(VersionsDifferenceRequest) returns (VersionsDifferenceResponse) {}
   rpc TranslateMakeName(ExternalMakeTranslateRequest) returns (MakeTranslationResponse) {}
   rpc TranslateModelName(ExternalModelTranslateRequest) returns (ModelTranslationResponse) {}
+  rpc TranslateVersionName(ExternalVersionTranslateRequest) returns (VersionTranslationResponse) {}
 }
