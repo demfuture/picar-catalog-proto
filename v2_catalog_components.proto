@@ -1,0 +1,103 @@
+syntax = "proto3";
+package picar_catalog;
+
+option go_package = "./pb";
+
+/**
+ * FuelType represents details about a vehicle's fuel system.
+ *
+ * It contains identifiers, name, categorization of the fuel type (hybrid, electric),
+ * and external system codes.
+ */
+message FuelType {
+  int32 id = 1;
+  string shortId = 2;
+  string name = 3;
+  bool isHybrid = 4;
+  bool isEv = 5;
+  string infocarCode = 6;
+  string eurotaxCode = 7;
+}
+
+message BodyType {
+  int32 id = 1;
+  string typeName = 2;
+}
+
+/**
+ * FeaturesType represents a vehicle feature or option.
+ * It contains various identifiers, descriptions, and categorization information
+ * for a specific feature that can be part of a vehicle's configuration.
+ *
+ * Fields:
+ * id - Unique identifier for the feature
+ * description - Human-readable description of the feature
+ * normalizedCode - Standardized code for the feature
+ * normalizedDescription - Standardized description of the feature
+ * featureGroup - Group or family this feature belongs to
+ * category - Category classification of the feature
+ * infocarCode - External reference code for Infocar system
+ * eurotaxCode - External reference code for Eurotax system
+ */
+message FeaturesType {
+  int32 id = 1;
+  string description = 2;
+  int32 normalizedCode = 3;
+  string normalizedDescription = 4;
+  string featureGroup = 5;
+  string category = 6;
+  string infocarCode = 7;
+  int32 eurotaxCode = 8;
+}
+
+/**
+ * Represents an emission homologation specification.
+ *
+ * This message contains information about vehicle emission standards 
+ * and related identification codes from different systems.
+ *
+ * @field id The unique identifier for the emission homologation.
+ * @field emissionName The name or description of the emission standard (e.g. "Euro 6", "ULEV").
+ * @field infocarCode The code representing this emission standard in the Infocar system.
+ * @field eurotaxCode The code representing this emission standard in the Eurotax system.
+ */
+message EmissionHomologation {
+  int32 id = 1;
+  string emissionName = 2;
+  string infocarCode = 3;
+  string eurotaxCode = 4;
+}
+
+message GearboxType {
+  string id = 1;
+  string name = 2;
+}
+
+message DriveType {
+  string id = 1;
+  string name = 2;
+}
+
+message FuelTypesResponse {
+  repeated FuelType types = 1;
+}
+
+message BodyTypesResponse {
+  repeated BodyType types = 1;
+}
+
+message FeaturesTypesResponse {
+  repeated FeaturesType types = 1;
+}
+
+message EmissionHomologationsResponse {
+  repeated EmissionHomologation types = 1;
+}
+
+message GearboxTypesResponse {
+  repeated GearboxType types = 1;
+}
+
+message DriveTypesResponse {
+  repeated DriveType types = 1;
+}
