@@ -10,14 +10,20 @@ enum CarCondition {
   NEW = 1;
 }
 
+enum VehicleType {
+  CAR = 0;
+  LCV = 1;
+}
+
 message VersionFromPlateData {
   string providerId = 1;
   string versionName = 2;
   string versionId = 3;
   int64 sellStart = 4;
   int64 sellEnd = 5;
-  bool cdn = 6;
-  string versionHandler = 7;
+  VehicleType vehicleType = 6;
+  bool cdn = 7;
+  string versionHandler = 8;
 }
 
 message ReferencedData {
@@ -109,6 +115,8 @@ message VersionDetailsResponse {
   repeated AvailableCarFeature carFeatures = 19;
   string provider = 20;
   int64 publicListPrice = 21;
+  VehicleType vehicleType = 22;
+  bool cdn = 23;
 }
 
 message ExternalCarMake {
@@ -122,6 +130,7 @@ message ExternalCarModel {
   string name = 1;
   string providerId = 2;
   string modelId = 3;
+  VehicleType vehicleType = 4;
 }
 
 message ExternalCarVersion {
@@ -132,6 +141,7 @@ message ExternalCarVersion {
   ReferencedData fuelType = 5;
   int64 sellStart = 6;
   int64 sellEnd = 7;
+  VehicleType vehicleType = 8;
 }
 
 message PlateRequest {
@@ -143,6 +153,7 @@ message VersionDetailsRequest {
   string provider = 1;
   CarCondition condition = 2;
   string providerId = 3;
+  optional bool showOnlyCars = 4;
 }
 
 message ExternalCatalogRequest {
@@ -150,6 +161,7 @@ message ExternalCatalogRequest {
   CarCondition condition = 2;
   string identifier = 3;
   int32 year = 4;
+  optional bool showOnlyCars = 5;
 }
 
 message ExternalMakesResponse {
@@ -201,8 +213,8 @@ message ExternalModelTranslateRequest {
   string modelName = 2;
   string makeProviderId = 3;
   optional int32 year = 4;
+  optional VehicleType vehicleType = 5;
 }
-
 
 message ModelTranslationResponse {
   ExternalCarModel model = 1;
@@ -215,8 +227,8 @@ message ExternalVersionTranslateRequest {
   string modelProviderId = 3;
   optional int32 year = 4;
   optional int32 fuelType = 5;
+  optional VehicleType vehicleType = 6;
 }
-
 
 message VersionTranslationResponse {
   ExternalCarVersion version = 1;
