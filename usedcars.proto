@@ -91,6 +91,7 @@ message AvailableCarFeature {
   string Category = 5;
   int32 NormalizedCode = 4;
   bool DefaultOption = 6;
+  string MakeCode = 7;
 }
 
 message VersionDetailsResponse {
