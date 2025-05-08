@@ -84,6 +84,27 @@ message VersionsFromPlateResponse {
   string provider = 9;
 }
 
+message CarPaint {
+  string code = 1;
+  string name = 2;
+  string displayColor = 3;
+}
+
+message VersionFromVinResponse {
+  string vinNumber = 1;
+  bool success = 2;
+  VersionDetailsResponse versionDetails = 3;
+  optional int64 productionDate = 4;
+  optional int64 deliveryDate = 5;
+  optional string originCountry = 6;
+  repeated AvailableCarFeature installedPaidFeatures = 7;
+  optional CarPaint externalColor = 8;
+  optional CarPaint internalColor = 9;
+  repeated string extraOptionalCodes = 10;
+  bool cdn = 11;
+  string provider = 12;
+}
+
 message AvailableCarFeature {
   int32 Id = 1;
   string ProviderId = 2;
@@ -92,6 +113,7 @@ message AvailableCarFeature {
   int32 NormalizedCode = 4;
   bool DefaultOption = 6;
   string MakeCode = 7;
+  int64 ListPrice = 8;
 }
 
 message VersionDetailsResponse {
@@ -150,11 +172,19 @@ message PlateRequest {
   string plateNumber = 2;
 }
 
+message VinRequest {
+  string provider = 1;
+  string vinNumber = 2;
+  optional string plateNumber = 3;
+  optional bool showOnlyCars = 4;
+}
+
 message VersionDetailsRequest {
   string provider = 1;
   CarCondition condition = 2;
   string providerId = 3;
   optional bool showOnlyCars = 4;
+  optional int64 sellDateReference = 5;
 }
 
 message ExternalCatalogRequest {
@@ -238,6 +268,7 @@ message VersionTranslationResponse {
 
 service ExternalCarInfo {
   rpc GetVersionsFromPlate(PlateRequest) returns (VersionsFromPlateResponse) {}
+  rpc GetVersionFromVin(VinRequest) returns (VersionFromVinResponse) {}
   rpc GetVersionsDetails(VersionDetailsRequest) returns (VersionDetailsResponse) {}
   rpc GetExternalMakes(ExternalCatalogRequest) returns (ExternalMakesResponse) {}
   rpc GetExternalModelsForMake(ExternalCatalogRequest) returns (ExternalModelsResponse) {}
