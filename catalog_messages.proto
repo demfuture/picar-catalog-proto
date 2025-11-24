@@ -134,6 +134,7 @@ message CarBodyData {
   int32 min_trunk = 7;
   int32 seats = 8;
   int32 doors = 9;
+  ShortBodyType body_type = 10;
 }
 
 message FuelSystemData {
