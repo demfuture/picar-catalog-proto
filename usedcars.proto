@@ -1,8 +1,15 @@
 syntax = "proto3";
 package picar_catalog;
 
-option go_package = "./pb";
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
+option go_package = "./pb";
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  base_path: "/api/v1"
+  schemes: HTTP
+  schemes: HTTPS
+};
 //Data
 
 enum CarCondition {
@@ -267,14 +274,62 @@ message VersionTranslationResponse {
 }
 
 service ExternalCarInfo {
-  rpc GetVersionsFromPlate(PlateRequest) returns (VersionsFromPlateResponse) {}
-  rpc GetVersionFromVin(VinRequest) returns (VersionFromVinResponse) {}
-  rpc GetVersionsDetails(VersionDetailsRequest) returns (VersionDetailsResponse) {}
-  rpc GetExternalMakes(ExternalCatalogRequest) returns (ExternalMakesResponse) {}
-  rpc GetExternalModelsForMake(ExternalCatalogRequest) returns (ExternalModelsResponse) {}
-  rpc GetExternalVersionsForModel(ExternalCatalogRequest) returns (ExternalVersionsResponse) {}
-  rpc GetExternalVersionsDifferences(VersionsDifferenceRequest) returns (VersionsDifferenceResponse) {}
-  rpc TranslateMakeName(ExternalMakeTranslateRequest) returns (MakeTranslationResponse) {}
-  rpc TranslateModelName(ExternalModelTranslateRequest) returns (ModelTranslationResponse) {}
-  rpc TranslateVersionName(ExternalVersionTranslateRequest) returns (VersionTranslationResponse) {}
+  rpc GetVersionsFromPlate(PlateRequest) returns (VersionsFromPlateResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {tags: "lookup"};
+    option (google.api.http) = {
+      post: "/external/{provider}/USED/plate"
+      body: "*"
+    };
+  }
+  rpc GetVersionFromVin(VinRequest) returns (VersionFromVinResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {tags: "lookup"};
+    option (google.api.http) = {
+      post: "/external/{provider}/USED/vin"
+      body: "*"
+    };
+  }
+  rpc GetVersionsDetails(VersionDetailsRequest) returns (VersionDetailsResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {tags: "external-catalog"};
+    option (google.api.http) = {get: "/external/{provider}/{condition}/version/{providerId}"};
+  }
+  rpc GetExternalMakes(ExternalCatalogRequest) returns (ExternalMakesResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {tags: "external-catalog"};
+    option (google.api.http) = {get: "/external/{provider}/{condition}/makes"};
+  }
+  rpc GetExternalModelsForMake(ExternalCatalogRequest) returns (ExternalModelsResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {tags: "external-catalog"};
+    option (google.api.http) = {get: "/external/{provider}/{condition}/models/{identifier}"};
+  }
+  rpc GetExternalVersionsForModel(ExternalCatalogRequest) returns (ExternalVersionsResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {tags: "external-catalog"};
+    option (google.api.http) = {get: "/external/{provider}/{condition}/versions/{identifier}"};
+  }
+  rpc GetExternalVersionsDifferences(VersionsDifferenceRequest) returns (VersionsDifferenceResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {tags: "external-catalog"};
+    option (google.api.http) = {
+      post: "/external/{provider}/{condition}/versions-differences"
+      body: "*"
+    };
+  }
+  rpc TranslateMakeName(ExternalMakeTranslateRequest) returns (MakeTranslationResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {tags: "translation"};
+    option (google.api.http) = {
+      post: "/external/{provider}/translate/make"
+      body: "*"
+    };
+  }
+  rpc TranslateModelName(ExternalModelTranslateRequest) returns (ModelTranslationResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {tags: "translation"};
+    option (google.api.http) = {
+      post: "/external/{provider}/translate/model"
+      body: "*"
+    };
+  }
+  rpc TranslateVersionName(ExternalVersionTranslateRequest) returns (VersionTranslationResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {tags: "translation"};
+    option (google.api.http) = {
+      post: "/external/{provider}/translate/version"
+      body: "*"
+    };
+  }
 }
