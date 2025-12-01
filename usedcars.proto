@@ -31,6 +31,7 @@ message VersionFromPlateData {
   VehicleType vehicleType = 6;
   bool cdn = 7;
   string versionHandler = 8;
+  optional string makeName = 9;
 }
 
 message ReferencedData {
