@@ -90,6 +90,7 @@ message VersionsFromPlateResponse {
   int32 expectedMileage = 7;
   bool cdn = 8;
   string provider = 9;
+  string makeName = 10;
 }
 
 message CarPaint {
