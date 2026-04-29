@@ -32,6 +32,7 @@ message VersionFromPlateData {
   bool cdn = 7;
   string versionHandler = 8;
   optional string makeName = 9;
+  optional int64 listPrice = 10;
 }
 
 message ReferencedData {
