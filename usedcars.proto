@@ -113,6 +113,7 @@ message VersionFromVinResponse {
   repeated string extraOptionalCodes = 10;
   bool cdn = 11;
   string provider = 12;
+  optional int64 referenceDate = 13;
 }
 
 message AvailableCarFeature {
@@ -187,6 +188,7 @@ message VinRequest {
   string vinNumber = 2;
   optional string plateNumber = 3;
   optional bool showOnlyCars = 4;
+  optional int64 referenceDate = 5;
 }
 
 message VersionDetailsRequest {
